@@ -1,0 +1,35 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+ RewriteCond %{HTTPS} !=on
+   RewriteRule ^ https://%{HTTP_Host}%{REQUEST_URI} [L,R=301]
+   # Remove public folder form URL
+   RewriteRule ^(.*)$ public/$1 [L]
+
+    RewriteRule ^(.*\.(?:jpg|png|gif|jpeg))$ assets.php?files=/$1 [L,QSA,NC]
+
+   
+Redirect 301 http://refber.vn/ban-tin/khoa-hoc-quan-ly-nha-hang-ngan-han-tai-ha-noi-1297.html https://refber.vn/khoa-hoc-quan-ly-nha-hang-ngan-han-tai-ha-noi-1297
+Redirect http://refber.vn/ban-tin/test.html https://refber.vn/sitemap.xml
+redirect 301 http://www.refber.vn/noi-dung/refber-chung-toi-la-ai-328 http://www.refber.vn/gioi-thieu
+    
+   
+    
+</IfModule>
